@@ -8,13 +8,18 @@ import java.util.Scanner;
 
 public class HttpConnector {
 
+	URL url;
+
+	public HttpConnector(URL url) {
+		this.url = url;
+	}
+
 	public String getResponse() throws Exception {
 		Scanner scan = null;
 		HttpURLConnection conn = null;
 		String entireResponse = null;
 		try {
-			URL url = new URL(
-					"http://maps.googleapis.com/maps/api/geocode/json?address=chicago&sensor=false&#8221;");
+
 			conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			// setting content-type header "application/json"
