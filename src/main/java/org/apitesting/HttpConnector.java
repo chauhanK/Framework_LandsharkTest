@@ -40,8 +40,10 @@ public class HttpConnector {
 			e.printStackTrace();
 
 		} finally {
-			conn.disconnect();
-			scan.close();
+			if (conn != null)
+				conn.disconnect();
+			if (scan != null)
+				scan.close();
 
 		}
 		return entireResponse;
