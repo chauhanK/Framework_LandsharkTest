@@ -1,9 +1,11 @@
 package org.apitesting;
 
+import static org.apitesting.Util.printExcel;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.URL;
 import java.util.ArrayList;
-
-import static org.apitesting.Util.*;
 
 public class Match {
 
@@ -20,10 +22,27 @@ public class Match {
 		ArrayList<String> cells = new ArrayList<String>();
 		cells.add("A1");
 		cells.add("B1");
-		ArrayList<String> values =  reader.readExcel(filePath, "haha.xlsx", "Sheet1", cells);
+		ArrayList<String> expectedvalues =  reader.readExcel(filePath, "haha.xlsx", "Sheet1", cells);
 		
-		printExcel(values);
+		printExcel(expectedvalues);
 		
+		JSONObject jsonResponse = new JSONObject(response);
+		
+		 JSONArray result = jsonResponse.getJSONArray("results");
+		 JSONObject result1 =  result.getJSONObject(0);
+		 
+		 String address = result1.getString("formatted_address");
+		 
+			System.out.println("status : " + address);		 
+		 
+		
+		/*for(String value : expectedvalues)
+		{
+			String responseCode = obj.getString(value);
+			System.out.println("status : " + responseCode);
+		}*/
+		
+
 	}
 
 }
